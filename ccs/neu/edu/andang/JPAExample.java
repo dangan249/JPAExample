@@ -16,7 +16,6 @@ public class JPAExample {
 		map.put("openjpa.ConnectionPassword", "Thanhcong123#");
 		map.put("openjpa.ConnectionURL", "jdbc:mysql://127.0.0.1/hw7");
 		map.put("openjpa.ConnectionDriverName", "com.mysql.jdbc.Driver");
-        map.put("openjpa.jdbc.SynchronizeMappings", "buildSchema");
 
    EntityManagerFactory factory = Persistence.createEntityManagerFactory("hw8", map);
 
@@ -24,13 +23,26 @@ public class JPAExample {
     EntityTransaction userTransaction = em.getTransaction();
 		userTransaction.begin();
 
-		// QUESTION !
-    List<Box> boxes = em.createQuery(
-            "SELECT p FROM Box p").getResultList();
 
-    for(Box box : boxes) {
-    	System.out.println(box);
-    	for(Containment containment : box.containments) {
+		// QUESTION !
+    List<Invoice> invoices = em.createQuery(
+            "SELECT p FROM Invoice p").getResultList();
+
+    for(Invoice invoice : invoices) {
+    	System.out.println(invoice);
+    	for(Containment containment : invoice.containments) {
+    		System.out.println();
+    	}
+    }    
+
+
+		// QUESTION !
+    List<Grouping> groupings = em.createQuery(
+            "SELECT p FROM Grouping p").getResultList();
+
+    for(Grouping grouping : groupings) {
+    	System.out.println(grouping);
+    	for(Containment containment : grouping.containments) {
     		System.out.println();
     	}
     }    
