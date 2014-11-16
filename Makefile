@@ -20,5 +20,5 @@ clean:
 	$(RM) ./ccs/neu/edu/andang/*.class
 
 run: $(CLASSES)
-	sudo java $(CP) .:$(JARPATH) $(MAIN)
+	java -noverify $(CP) .:$(JARPATH) $(MAIN)
 

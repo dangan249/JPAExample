@@ -1,0 +1,14 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    version="1.0">
+  <persistence-unit  name="hw8" transaction-type="RESOURCE_LOCAL">
+  	<provider>
+  		org.apache.openjpa.persistence.PersistenceProviderImpl
+  	</provider>
+    <class>ccs.neu.edu.andang.Product</class>
+    <class>ccs.neu.edu.andang.Grouping</class>
+    <class>ccs.neu.edu.andang.Invoice</class>
+     <class>ccs.neu.edu.andang.Box</class>
+      <class>ccs.neu.edu.andang.Containment</class>
+  </persistence-unit>
+</persistence>
