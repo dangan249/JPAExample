@@ -1,69 +1,95 @@
 package ccs.neu.edu.andang;
 
-import javax.persistence.Entity;
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import java.util.List;
-import java.util.ArrayList;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.lang.Double;
+import java.lang.Override;
+import java.lang.String;
 
 import javax.persistence.OneToMany;
-import  static javax.persistence.FetchType.EAGER;
+import java.util.Collection;
 
+@Entity(name = "PRODUCT")
+public class Product implements Serializable {
 
-@Entity
-@Access(AccessType.FIELD)
-public class Product {
-
-  @Id @GeneratedValue
+  @Id //signifies the primary key
+  @Column(name = "id", nullable = false)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
+
+  @Column(name = "weight")
   private Double weight;
+
+  @Column(name = "volume")
   private Double volume;
 
-  @OneToMany(mappedBy="product",fetch=EAGER)
-  public List<Containment> containments = new ArrayList();;
+  @OneToMany(mappedBy="product",targetEntity=Containment.class,fetch=FetchType.EAGER)
+  private Collection<Containment> containments;
 
-  public Product() {}
-  public Product(Double weight, Double volume) {
-		this.weight = weight;
-		this.volume = volume;
+
+  public Double getWeight() {
+    return weight;
   }
 
-  public Product(int id, Double weight, Double volume) {
-  	this.id = id;
-		this.weight = weight;
-		this.volume = volume;
+  public void setWeight(Double weight) {
+    this.weight = weight;
   }
 
-  public Product(int id, Double weight, Double volume, List<Containment> containments) {
-  	this.id = id;
-		this.weight = weight;
-		this.volume = volume;
-		this.containments = containments;
+  public Double getVolume() {
+    return volume;
   }
 
-  public Product(Double weight, Double volume, List<Containment> containments) {
-		this.weight = weight;
-		this.volume = volume;
-		this.containments = containments;
+  public void setVolume(Double volume) {
+    this.volume = volume;
   }
 
-  public String toString() {
-		return "Product " + id + " " + weight + " " + volume;
+  public Collection<Containment> getContainments() {
+    return containments;
+  }
+
+  public void setContainments(Collection<Containment> containments) {
+    this.containments = containments;
   }
 
   public int getId() {
-  	return this.id;
-  }
-  
-  public void setId(int id) {
-  	this.id = id;
+    return id;
   }
 
-  public void setContainments(List<Containment> containments) {
-  	this.containments = containments;
+  public void setId(int id) {
+    this.id = id;
+  }
+
+  @Override
+  public String toString() {
+    return "Product{" +
+        "id=" + id +
+        ", weight=" + weight +
+        ", volume=" + volume +
+        ", containments=" + containments +
+        '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Product product = (Product) o;
+
+    if (id != product.id) return false;
+    if (containments != null ? !containments.equals(product.containments) : product.containments != null) return false;
+    if (volume != null ? !volume.equals(product.volume) : product.volume != null) return false;
+    if (weight != null ? !weight.equals(product.weight) : product.weight != null) return false;
+
+    return true;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = id;
+    result = 31 * result + (weight != null ? weight.hashCode() : 0);
+    result = 31 * result + (volume != null ? volume.hashCode() : 0);
+    result = 31 * result + (containments != null ? containments.hashCode() : 0);
+    return result;
   }
 }

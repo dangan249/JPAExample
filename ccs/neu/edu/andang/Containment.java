@@ -1,51 +1,79 @@
 package ccs.neu.edu.andang;
 
-import javax.persistence.Entity;
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.PrimaryKeyJoinColumn;
-import java.util.List;
-import javax.persistence.ManyToOne;
-	import javax.persistence.IdClass;
-import static javax.persistence.FetchType.EAGER;
- import  static javax.persistence.CascadeType.ALL;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.lang.Override;
+import java.lang.String;
 
-@Entity
-@Access(AccessType.FIELD)
+@Entity(name = "CONTAINMENT")
 @IdClass(ContainmentId.class)
-public class Containment {
+public class Containment implements Serializable {
 
   @Id
-  public int contains;
+  @Column(name = "contains", nullable = false)
+  private int contains;
 
   @Id
-  public int isContainedIn;
+  @Column(name = "isContainedIn", nullable = false)
+  private int isContainedIn;
 
+  @Column(name = "count")
   public int count;
 
-  @ManyToOne(cascade=ALL, fetch=EAGER)
-  @PrimaryKeyJoinColumn(name="contains", referencedColumnName="id")
-  public Product product;
+  @ManyToOne(optional=false)
+  @JoinColumn(name="contains",referencedColumnName="id")
+  private Product product;
 
+  @ManyToOne(optional=false)
+  @JoinColumn(name="isContainedIn",referencedColumnName="id")
+  private Grouping grouping;
 
-  @ManyToOne(cascade=ALL, fetch=EAGER)
-  @PrimaryKeyJoinColumn(name="isContainedIn", referencedColumnName="id")
-  public Grouping grouping;
+  public int getContains() {
+    return contains;
+  }
 
+  public void setContains(int contains) {
+    this.contains = contains;
+  }
 
-  public Containment() {}
-  public Containment(int contains, int isContainedIn, int count) {
-		this.contains = contains;
-		this.isContainedIn = isContainedIn;
+  public int getIsContainedIn() {
+    return isContainedIn;
+  }
+
+  public void setIsContainedIn(int isContainedIn) {
+    this.isContainedIn = isContainedIn;
+  }
+
+  public int getCount() {
+    return count;
+  }
+
+  public void setCount(int count) {
     this.count = count;
   }
 
+  public Grouping getGrouping() {
+    return grouping;
+  }
+
+  public void setGrouping(Grouping grouping) {
+    this.grouping = grouping;
+  }
+
+  public Product getProduct() {
+    return product;
+  }
+
+  public void setProduct(Product product) {
+    this.product = product;
+  }
+
+  @Override
   public String toString() {
-    return "Containment contains " + contains + ",isContainedIn " + isContainedIn 
-    + ". count " + count;
+    return "Containment{" +
+        "contains=" + contains +
+        ", isContainedIn=" + isContainedIn +
+        ", count=" + count
+        ;
   }
 }
