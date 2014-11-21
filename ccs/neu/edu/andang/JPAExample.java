@@ -14,8 +14,8 @@ import javax.persistence.EntityTransaction;
 public class JPAExample {
 	public static void main(String args[]) {
 		Map<Object,Object> map = new HashMap<Object,Object>();
-		map.put("openjpa.ConnectionUserName", "root");
-		map.put("openjpa.ConnectionPassword", "Thanhcong123#");
+		map.put("openjpa.ConnectionUserName", "***Fill in Yours***");
+		map.put("openjpa.ConnectionPassword", "***Fill in Yours***");
 		map.put("openjpa.ConnectionURL", "jdbc:mysql://127.0.0.1/hw7");
 		map.put("openjpa.ConnectionDriverName", "com.mysql.jdbc.Driver");
 
