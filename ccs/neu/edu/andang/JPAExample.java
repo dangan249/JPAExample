@@ -16,7 +16,7 @@ public class JPAExample {
 		Map<Object,Object> map = new HashMap<Object,Object>();
 		map.put("openjpa.ConnectionUserName", "***Fill in Yours***");
 		map.put("openjpa.ConnectionPassword", "***Fill in Yours***");
-		map.put("openjpa.ConnectionURL", "jdbc:mysql://127.0.0.1/hw7");
+		map.put("openjpa.ConnectionURL", "***Fill in Yours***");
 		map.put("openjpa.ConnectionDriverName", "com.mysql.jdbc.Driver");
 
    EntityManagerFactory factory = Persistence.createEntityManagerFactory("hw8", map);
